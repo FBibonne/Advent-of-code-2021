@@ -28,7 +28,7 @@ const App = () => {
           },
         ]}
         data={data}
-        title="Advent of code 2020"
+        title="Advent of code 2021"
         icons={tableIcons}
         options={{
           paging: true,

@@ -22,9 +22,6 @@ function addPoints(map, x, y1, y2, makePoint){
     for (let y = start; y <= end ; y++) {
         const point=makePoint(parseInt(x,10),y);
         var count=map.get(point);
-        if (count!==undefined){
-            console.log(point+" : "+count);
-        }
         count=count===undefined?1:count+1;
         map.set(point, count);
         

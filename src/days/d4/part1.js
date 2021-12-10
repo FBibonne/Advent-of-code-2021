@@ -15,7 +15,7 @@ const D4P1 = (input) => {
 
 };
 
-class Board{
+export class Board{
 
     constructor(table, size){
         this.size=size;

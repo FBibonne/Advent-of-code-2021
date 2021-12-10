@@ -4,56 +4,16 @@ import { NoMeetingRoom } from "@material-ui/icons";
 
 
 const D5P2 = (input) => {
-    const lines=/*d5Extractor(input)*/[{
-        x1:0, y1:0,
-        x2:0, y2:0},
-    {   x1:0, y1:0,
-        x2:10, y2:10},
-        {   x1:1, y1:2,
-            x2:-9, y2:-8},
-    {   x1:4, y1:2,
-        x2:-9, y2:-8},
-        {   x1:4, y1:2,
-            x2:4, y2:-8}, 
-    {   x1:4, y1:-8,
-         x2:-9, y2:-8},       
-    {   x1:0, y1:0,
-        x2:1, y2:0,
-        size:u=>u.x2-u.x1
-    },
-    {
-        x1:0, y1:0,
-        x2:0, y2:1,
-        size:u=>u.y2-u.y1
-    },
-    {
-        x1:0, y1:0,
-        x2:1, y2:-1,
-        size:u=>u.x2-u.x1
-    },
-    {
-        x1:0, y1:0,
-        x2:1, y2:1,
-        size:u=>u.x2-u.x1
-    },
-    {
-        x1:0, y1:0,
-        x2:-1, y2:1,
-        size:u=>u.y2-u.y1
-    },
-    {
-        x1:0, y1:0,
-        x2:-1, y2:-1,
-        size:u=>u.y1-u.y2
-    }];;
+    const lines=d5Extractor(input);
+    const diagram=new Map();
     lines.forEach(line=>checkLineAndShowPoints({
         x1 : parseInt(line.x1,10),
         y1 : parseInt(line.y1,10),
         x2 : parseInt(line.x2,10),
         y2 : parseInt(line.y2,10),
-    })
+    }, diagram)
     );
- 
+    return Array.from(diagram.values()).filter(c=>c>1).length;
 };
 
 /**
@@ -62,7 +22,7 @@ const D5P2 = (input) => {
  * 
  * @param {Point} u : vector not null defined by (u.x1, u.y1) -> (u.x2, u.y2)
  */
-function checkLineAndShowPoints(u){
+function checkLineAndShowPoints(u, diagram){
     const base=[{
         x1:0, y1:0,
         x2:1, y2:0,
@@ -105,7 +65,7 @@ function checkLineAndShowPoints(u){
     }];
     base.forEach(i=>{
         if(hasSameDirection(u, i)){
-            showPoints(u, i);
+            calcPointsAndAddInDiagram(u, i, diagram);
 
         }
     });
@@ -116,14 +76,22 @@ function checkLineAndShowPoints(u){
  * 
  * @param {Point} u : vector not null defined by (u.x1, u.y1) -> (u.x2, u.y2)
  */
-function showPoints(u, i){
-    console.log("("+u.x1+", "+u.y1+") -> ("+u.x2+", "+u.y2+") avec ("+i.x2+", "+i.y2+")");
+function calcPointsAndAddInDiagram(u, i, map){
+    //console.log("("+u.x1+", "+u.y1+") -> ("+u.x2+", "+u.y2+") avec ("+i.x2+", "+i.y2+")");
     for(let t=0; t<=i.size(u);t++){
-        console.log({
+        /*console.log({
             x:u.x1+t*(i.x2-i.x1),
             y:u.y1+t*(i.y2-i.y1)
-        });
+        });*/
+        const point=(u.x1+t*(i.x2-i.x1))+"_"+(u.y1+t*(i.y2-i.y1));
+        var count=map.get(point);
+        if (count!==undefined){
+            console.log(point+" : "+count);
+        }
+        count=count===undefined?1:count+1;
+        map.set(point, count);
     }
+    return map;
 
 }
 

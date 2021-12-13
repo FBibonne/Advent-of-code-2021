@@ -1,6 +1,5 @@
 import { input } from "./input";
 import { d5Extractor} from "./common";
-import { NoMeetingRoom } from "@material-ui/icons";
 
 
 const D5P2 = (input) => {
@@ -85,31 +84,11 @@ function calcPointsAndAddInDiagram(u, i, map){
         });*/
         const point=(u.x1+t*(i.x2-i.x1))+"_"+(u.y1+t*(i.y2-i.y1));
         var count=map.get(point);
-        if (count!==undefined){
-            console.log(point+" : "+count);
-        }
         count=count===undefined?1:count+1;
         map.set(point, count);
     }
     return map;
 
-}
-
-function addPoints(map, x, y1, y2, makePoint){
-    const start=Math.min(parseInt(y1,10), parseInt(y2,10))
-    const end=Math.max(parseInt(y1,10), parseInt(y2,10));
-    // Array.from({length:(end-start+1)}, (v,k)=>k+start).forEach : c'est moche !
-    for (let y = start; y <= end ; y++) {
-        const point=makePoint(parseInt(x,10),y);
-        var count=map.get(point);
-        if (count!==undefined){
-            console.log(point+" : "+count);
-        }
-        count=count===undefined?1:count+1;
-        map.set(point, count);
-        
-    }
-    return map;
 }
 
 /**

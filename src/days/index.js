@@ -6,4 +6,5 @@ export * from "./d5";
 export * from "./d6";
 export * from "./d7";
 export * from "./d8";
+export * from "./d9";
 // ...

@@ -7,4 +7,4 @@ export * from "./d6";
 export * from "./d7";
 export * from "./d8";
 export * from "./d9";
-// ...
+export * from "./d10";

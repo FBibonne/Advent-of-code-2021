@@ -13,10 +13,8 @@ const D9P2 = (input) => {
                                         && (height.i<table.length-1?height.value<table[height.i+1][height.j]:true)
                                     )
                 )
-    console.log(lows);
     lows=lows.map(low=>bassinScan(low, map))
     lows.sort((a,b)=>b-a);
-    console.log(lows);
     return lows[0]*lows[1]*lows[2];
 }
 
@@ -37,7 +35,6 @@ const bassinScan=(start, map)=>{
     if (start.i<height-1 && map[start.i+1][start.j]!=null && map[start.i+1][start.j]!==9){
         retour+=bassinScan({i:start.i+1, j:start.j}, map);
     }
-    //console.log(`${start.i},${start.i}->${retour}`);
     return retour;
 }
 

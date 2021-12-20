@@ -16,15 +16,15 @@ const D10P1 = (input) => d10Extractor(input).map((line,_) => {
     return score(illegalChar);
 }).reduce((a,b)=>a+b);
 
-const isOpening=(delimiter)=> "([{<".includes(delimiter)
+export const isOpening=(delimiter)=> "([{<".includes(delimiter)
 
-const delimiterPairs=[{opening:"(", closing:")"},
+export const delimiterPairs=[{opening:"(", closing:")"},
                       {opening:"[", closing:"]"},
                       {opening:"{", closing:"}"},
                       {opening:"<", closing:">"},
 ]
 
-const closing=(delimiter)=>{
+export const closing=(delimiter)=>{
     const pair=delimiterPairs.filter(({opening})=>opening===delimiter)[0];
     return pair===undefined?undefined:pair.closing;
 }

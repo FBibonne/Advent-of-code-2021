@@ -11,7 +11,7 @@ const D11P1 = (input) => {
     return count;
 }
 
-const makeStep=(grid)=>{
+export const makeStep=(grid)=>{
     const flashes=[];
     
     grid.forEach((line,i) => 
